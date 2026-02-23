@@ -11,681 +11,423 @@
         /* --- CSS STYLES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', 'Tahoma', 'Apple Color Emoji', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
             padding: 20px;
             color: #333;
         }
-        .container { max-width: 1600px; margin: 0 auto; }
+        .container { max-width: 1400px; margin: 0 auto; }
         
-        /* Cards */
         .card {
             background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+            border: 1px solid #fff;
         }
 
         /* Header */
-        .header { text-align: center; }
-        .header h1 { color: #2c3e50; font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
-        .header p { color: #7f8c8d; font-size: 1.1rem; }
+        .header { text-align: center; border-bottom: 4px solid #764ba2; }
+        .header h1 { color: #2c3e50; font-size: 2rem; margin-bottom: 5px; }
+        .header p { color: #7f8c8d; }
 
         /* Upload & Filter */
-        .upload-container { text-align: center; }
-        .upload-container h3 { color: #2c3e50; margin-bottom: 15px; }
-        .upload-container input[type="file"] {
-            margin-bottom: 20px; border: 2px dashed #bdc3c7; padding: 15px;
-            border-radius: 10px; cursor: pointer; width: 100%; max-width: 400px;
+        .upload-section { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        input[type="file"] {
+            padding: 10px; border: 2px dashed #3498db; border-radius: 10px; width: 100%; max-width: 400px;
         }
-        button {
-            background: linear-gradient(135deg, #3498db, #2980b9); color: white; border: none;
-            padding: 10px 25px; border-radius: 50px; cursor: pointer; transition: all 0.3s ease;
-            font-weight: 600; margin: 5px;
-        }
-        button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        button:disabled { background: #bdc3c7; cursor: not-allowed; }
         
         .filter-container {
-            margin-top: 20px; padding-top: 20px; border-top: 1px solid #ecf0f1;
-            display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap;
+            display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; align-items: center;
+            padding-top: 15px; border-top: 1px solid #eee; width: 100%;
         }
-        .filter-container input[type="date"] { padding: 8px; border-radius: 8px; border: 1px solid #bdc3c7; }
+        
+        button {
+            padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer;
+            font-weight: 600; transition: 0.3s; color: white;
+        }
+        #processFileBtn { background: #3498db; }
         #filterBtn { background: #27ae60; }
         #resetBtn { background: #e67e22; }
+        #exportMainBtn { background: #2c3e50; }
+        button:hover:not(:disabled) { opacity: 0.8; transform: translateY(-1px); }
+        button:disabled { background: #bdc3c7; cursor: not-allowed; }
 
         /* Stats Grid */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 30px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .stat-card {
-            background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 20px;
-            text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            background: white; padding: 20px; border-radius: 12px; text-align: center;
+            border-left: 5px solid #eee; transition: 0.3s;
         }
-        .stat-card:hover { transform: translateY(-5px); }
-        .stat-icon {
-            width: 60px; height: 60px; margin: 0 auto 15px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 24px; color: white;
-        }
-        .stat-card.overdue .stat-icon { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-        .stat-card.current .stat-icon { background: linear-gradient(135deg, #27ae60, #229954); }
-        .stat-card.total .stat-icon { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
-        .stat-card.customers .stat-icon { background: linear-gradient(135deg, #3498db, #2980b9); }
-        .stat-value { font-size: 2rem; font-weight: 700; color: #2c3e50; }
-        .stat-label { color: #7f8c8d; font-size: 1rem; }
+        .stat-card:hover { transform: scale(1.02); }
+        .stat-card.total { border-left-color: #9b59b6; }
+        .stat-card.overdue { border-left-color: #e74c3c; }
+        .stat-card.current { border-left-color: #27ae60; }
+        .stat-card.customers { border-left-color: #3498db; }
+        .stat-value { font-size: 1.5rem; font-weight: 800; margin: 5px 0; }
+        .stat-label { font-size: 0.9rem; color: #7f8c8d; }
 
         /* Charts */
-        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 30px; }
-        .chart-container h3 { text-align: center; margin-bottom: 20px; color: #2c3e50; }
+        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
         /* Table */
         .table-container { overflow-x: auto; }
-        .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; color: #2c3e50; position: sticky; top: 0; }
+        th.sortable { cursor: pointer; }
+        th.sortable:hover { background: #edf2f7; }
         
-        /* Menu & Dropdown */
-        .menu-container { position: relative; display: inline-block; }
-        .menu-btn { background: none; color: #555; font-size: 24px; padding: 0 10px; border-radius: 5px; }
-        .menu-btn:hover { background: #ecf0f1; box-shadow: none; transform: none; }
-        .dropdown-content {
-            display: none; position: absolute; right: 0; background-color: #fff;
-            min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 10;
-            border-radius: 8px; overflow: hidden; border: 1px solid #f0f0f0;
-        }
-        .dropdown-content a {
-            color: #333; padding: 12px 16px; text-decoration: none; display: block; font-size: 0.9rem;
-        }
-        .dropdown-content a:hover { background-color: #f5f5f5; }
-        .show { display: block; }
-
-        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ecf0f1; white-space: nowrap; }
-        th { background: #f8f9fa; font-weight: 600; color: #2c3e50; position: sticky; top: 0; user-select: none; }
-        
-        /* Sorting UI */
-        th.sortable { cursor: pointer; transition: background 0.2s; }
-        th.sortable:hover { background: #ecf0f1; }
-        .sort-icon { display: inline-block; margin-left: 5px; font-size: 0.8em; color: #95a5a6; }
-        th.sortable.active .sort-icon { color: #2c3e50; font-weight: bold; }
-
-        tr.clickable-row:hover { background: #f0f3f4; cursor: pointer; }
-        
-        .status { padding: 5px 10px; border-radius: 15px; font-size: 0.8rem; font-weight: 600; text-align: center; }
-        .status.overdue { background: #ffebee; color: #c62828; }
-        .status.current { background: #e8f5e8; color: #2e7d32; }
-        .status.prepaid { background: #e3f2fd; color: #1565c0; }
-        
-        .amount { font-weight: 600; }
-        .amount.negative { color: #e74c3c; }
-        .amount.positive { color: #27ae60; }
-        
-        .placeholder { text-align: center; padding: 40px; color: #95a5a6; }
+        tr.clickable-row:hover { background: #f1f5f9; cursor: pointer; }
+        .status { padding: 4px 8px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
+        .status.overdue { background: #ffdce0; color: #af1e2c; }
+        .status.current { background: #dcfce7; color: #15803d; }
+        .status.prepaid { background: #dbeafe; color: #1e40af; }
 
         /* Modal */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
-        .modal-content {
-            background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888;
-            width: 80%; max-width: 900px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-        }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
-        .close-btn { color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; }
-        .close-btn:hover { color: #000; }
-        .modal-body { max-height: 60vh; overflow-y: auto; }
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+        .modal-content { background: white; margin: 5% auto; padding: 25px; border-radius: 15px; width: 80%; max-width: 800px; position: relative; }
+        .close { position: absolute; right: 20px; top: 15px; font-size: 24px; cursor: pointer; }
 
-        @media (max-width: 768px) {
-            .charts-grid { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.8rem; }
-        }
+        @media (max-width: 768px) { .charts-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header card">
-            <h1>📊 Dashboard รายงานลูกหนี้</h1>
-            <p>สรุปข้อมูลการเงินและลูกหนี้ - Florenza Clinic</p>
-        </div>
 
-        <div class="upload-container card">
-            <h3>📤 อัปโหลดไฟล์รายงานลูกหนี้</h3>
-            <p>รองรับไฟล์ .xlsx, .xls, .csv จากระบบ</p>
-            <input type="file" id="fileInput" accept=".csv, .xls, .xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-            <br>
-            <button id="processFileBtn">วิเคราะห์ข้อมูล</button>
-            <div class="filter-container">
-                <label for="startDate">ตั้งแต่:</label>
-                <input type="date" id="startDate" disabled>
-                <label for="endDate">ถึง:</label>
-                <input type="date" id="endDate" disabled>
-                <button id="filterBtn" disabled>กรองข้อมูล</button>
-                <button id="resetBtn" disabled>ล้างตัวกรอง & รีเซ็ตการเรียง</button>
-            </div>
-        </div>
-
-        <div class="stats-grid">
-            <div class="stat-card total">
-                <div class="stat-icon">💰</div>
-                <div class="stat-value" id="totalAmount">0</div>
-                <div class="stat-label">ยอดลูกหนี้รวม (บาท)</div>
-            </div>
-            <div class="stat-card overdue">
-                <div class="stat-icon">⚠️</div>
-                <div class="stat-value" id="overdueAmount">0</div>
-                <div class="stat-label">ลูกหนี้เกินกำหนด (บาท)</div>
-            </div>
-            <div class="stat-card current">
-                <div class="stat-icon">✅</div>
-                <div class="stat-value" id="currentAmount">0</div>
-                <div class="stat-label">ลูกหนี้ปัจจุบัน (บาท)</div>
-            </div>
-            <div class="stat-card customers">
-                <div class="stat-icon">👥</div>
-                <div class="stat-value" id="totalCustomers">0</div>
-                <div class="stat-label">จำนวนลูกค้า (ราย)</div>
-            </div>
-        </div>
-
-        <div class="charts-grid">
-            <div class="chart-container card">
-                <h3>📈 สัดส่วนสถานะลูกหนี้</h3>
-                <canvas id="statusChart"></canvas>
-            </div>
-            <div class="chart-container card">
-                <h3>📊 รายงานอายุลูกหนี้ (Aging Report)</h3>
-                <canvas id="agingChart"></canvas>
-            </div>
-        </div>
-
-        <div class="table-container card">
-            <div class="table-header">
-                <h3>📋 รายละเอียดลูกหนี้ (คลิกแถวเพื่อดูรายการย่อย)</h3>
-                <div class="menu-container">
-                    <button id="tableMenuBtn" class="menu-btn">⋮</button>
-                    <div id="tableMenu" class="dropdown-content">
-                        <a href="#" id="exportExcelBtn">📄 ส่งออกเป็น Excel</a>
-                        <a href="#" id="printTableBtn">🖨️ พิมพ์ตาราง</a>
-                    </div>
-                </div>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ลำดับ</th>
-                        <th>ชื่อลูกค้า</th>
-                        <th>เลข HN</th>
-                        <th>เบอร์โทร</th>
-                        <th>รายการที่ค้าง</th>
-                        <th class="sortable" onclick="sortTable('amount')">
-                            จำนวนเงิน (บาท) <span id="sortIcon-amount" class="sort-icon">⇅</span>
-                        </th>
-                        <th class="sortable" onclick="sortTable('date')">
-                            วันที่ซื้อล่าสุด <span id="sortIcon-date" class="sort-icon">⇅</span>
-                        </th>
-                        <th>จำนวนวัน (ค้าง/เหลือ)</th>
-                        <th>สถานะ</th>
-                    </tr>
-                </thead>
-                <tbody id="debtTable">
-                    <tr><td colspan="9" class="placeholder">โปรดอัปโหลดไฟล์ข้อมูลเพื่อแสดงรายละเอียด</td></tr>
-                </tbody>
-            </table>
-        </div>
+<div class="container">
+    <div class="header card">
+        <h1>📊 Dashboard รายงานลูกหนี้</h1>
+        <p>Florenza Clinic | ระบบสรุปและวิเคราะห์ข้อมูลการเงิน</p>
     </div>
-    
-    <div id="detailsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalTitle">รายละเอียดรายการ</h2>
-                <span class="close-btn">&times;</span>
+
+    <div class="card upload-section">
+        <h3>อัปโหลดไฟล์ (.xlsx หรือ .csv)</h3>
+        <input type="file" id="fileInput" accept=".xlsx, .xls, .csv">
+        <button id="processFileBtn">วิเคราะห์ข้อมูล</button>
+
+        <div class="filter-container">
+            <div>
+                เริ่ม: <input type="date" id="startDate" disabled>
+                ถึง: <input type="date" id="endDate" disabled>
             </div>
-            <div class="modal-body" id="modalBody"></div>
+            <button id="filterBtn" disabled>🔍 กรองข้อมูล</button>
+            <button id="resetBtn" disabled>🔄 ล้างตัวกรอง</button>
+            <button id="exportMainBtn" disabled>📥 ส่งออก Excel</button>
         </div>
     </div>
 
-    <script>
-        // --- Global Variables ---
-        let allCleanData = [];
-        let currentDisplayData = []; 
-        let customerDetails = {};
-        let statusChart, agingChart;
-        let currentSort = { column: null, direction: 'desc' }; // Default sort state
+    <div class="stats-grid">
+        <div class="stat-card total">
+            <div class="stat-label">ยอดลูกหนี้รวม</div>
+            <div class="stat-value" id="totalAmount">0</div>
+            <div class="stat-label">บาท</div>
+        </div>
+        <div class="stat-card overdue">
+            <div class="stat-label">ลูกหนี้เกินกำหนด</div>
+            <div class="stat-value" id="overdueAmount" style="color: #e74c3c;">0</div>
+            <div class="stat-label">บาท</div>
+        </div>
+        <div class="stat-card current">
+            <div class="stat-label">ลูกหนี้ปัจจุบัน</div>
+            <div class="stat-value" id="currentAmount" style="color: #27ae60;">0</div>
+            <div class="stat-label">บาท</div>
+        </div>
+        <div class="stat-card customers">
+            <div class="stat-label">ลูกค้าทั้งหมด</div>
+            <div class="stat-value" id="totalCustomers">0</div>
+            <div class="stat-label">ราย</div>
+        </div>
+    </div>
 
-        // --- DOM Elements ---
-        const fileInput = document.getElementById('fileInput');
-        const processBtn = document.getElementById('processFileBtn');
-        const debtTableBody = document.getElementById('debtTable');
-        const startDateInput = document.getElementById('startDate');
-        const endDateInput = document.getElementById('endDate');
-        const filterBtn = document.getElementById('filterBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const modal = document.getElementById('detailsModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalBody = document.getElementById('modalBody');
-        const closeBtn = document.querySelector('.close-btn');
-        const tableMenuBtn = document.getElementById('tableMenuBtn');
-        const tableMenu = document.getElementById('tableMenu');
-        const exportExcelBtn = document.getElementById('exportExcelBtn');
-        const printTableBtn = document.getElementById('printTableBtn');
+    <div class="charts-grid" style="margin-top: 25px;">
+        <div class="card">
+            <h3 style="text-align: center; margin-bottom: 15px;">สัดส่วนสถานะลูกหนี้</h3>
+            <canvas id="statusChart"></canvas>
+        </div>
+        <div class="card">
+            <h3 style="text-align: center; margin-bottom: 15px;">อายุหนี้ (Aging Report)</h3>
+            <canvas id="agingChart"></canvas>
+        </div>
+    </div>
 
-        // --- Initialize Charts ---
-        const statusCtx = document.getElementById('statusChart').getContext('2d');
-        statusChart = new Chart(statusCtx, {
+    <div class="card table-container">
+        <h3>📋 รายละเอียดลูกหนี้</h3>
+        <p style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">* คลิกที่แถวเพื่อดูประวัติการซื้อย่อย</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ลำดับ</th>
+                    <th>ชื่อลูกค้า</th>
+                    <th>เลข HN</th>
+                    <th>เบอร์โทร</th>
+                    <th class="sortable" id="sortAmount">ยอดเงิน (บาท) ⇅</th>
+                    <th class="sortable" id="sortDate">วันที่ล่าสุด ⇅</th>
+                    <th>สถานะ</th>
+                </tr>
+            </thead>
+            <tbody id="debtTable">
+                <tr><td colspan="7" style="text-align: center; padding: 40px;">กรุณาอัปโหลดไฟล์ข้อมูล</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="detailsModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalTitle">รายละเอียด</h2>
+        <hr style="margin: 15px 0;">
+        <div id="modalBody" class="table-container"></div>
+    </div>
+</div>
+
+<script>
+    // --- Global States ---
+    let allCleanData = [];
+    let currentDisplayData = [];
+    let customerDetails = {};
+    let statusChart, agingChart;
+    let sortDir = { amount: 'desc', date: 'desc' };
+
+    // --- DOM Elements ---
+    const fileInput = document.getElementById('fileInput');
+    const processBtn = document.getElementById('processFileBtn');
+    const debtTableBody = document.getElementById('debtTable');
+    const filterBtn = document.getElementById('filterBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const exportBtn = document.getElementById('exportMainBtn');
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+
+    // --- Initialize Charts ---
+    function initCharts() {
+        const sCtx = document.getElementById('statusChart').getContext('2d');
+        statusChart = new Chart(sCtx, {
             type: 'doughnut',
             data: {
                 labels: ['เกินกำหนด', 'ปัจจุบัน', 'ชำระล่วงหน้า'],
                 datasets: [{ data: [0, 0, 0], backgroundColor: ['#e74c3c', '#27ae60', '#3498db'] }]
             },
-            options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            options: { plugins: { legend: { position: 'bottom' } } }
         });
 
-        const agingCtx = document.getElementById('agingChart').getContext('2d');
-        agingChart = new Chart(agingCtx, {
+        const aCtx = document.getElementById('agingChart').getContext('2d');
+        agingChart = new Chart(aCtx, {
             type: 'bar',
             data: {
                 labels: ['0-30 วัน', '31-60 วัน', '61-90 วัน', '91+ วัน'],
-                datasets: [{ label: 'ยอดค้างชำระ (บาท)', data: [0, 0, 0, 0], backgroundColor: 'rgba(155, 89, 182, 0.8)', borderRadius: 5 }]
-            },
-            options: { responsive: true, scales: { y: { beginAtZero: true } } }
-        });
-
-        // --- Event Listeners ---
-        processBtn.addEventListener('click', handleFileUpload);
-        filterBtn.addEventListener('click', handleFilter);
-        resetBtn.addEventListener('click', handleReset);
-        closeBtn.onclick = () => { modal.style.display = "none"; };
-        window.onclick = (event) => {
-            if (event.target == modal) modal.style.display = "none";
-            if (!event.target.matches('.menu-btn')) {
-                if (tableMenu.classList.contains('show')) tableMenu.classList.remove('show');
+                datasets: [{ label: 'ยอดเงิน (บาท)', data: [0,0,0,0], backgroundColor: '#9b59b6' }]
             }
-        };
-        debtTableBody.addEventListener('click', (event) => {
-            const row = event.target.closest('tr.clickable-row');
-            if(row) showDetailsModal(row.dataset.customerName);
         });
-        tableMenuBtn.addEventListener('click', (e) => { e.stopPropagation(); tableMenu.classList.toggle('show'); });
-        exportExcelBtn.addEventListener('click', (e) => { e.preventDefault(); exportTableToExcel(); tableMenu.classList.remove('show'); });
-        printTableBtn.addEventListener('click', (e) => { e.preventDefault(); printCurrentTable(); tableMenu.classList.remove('show'); });
+    }
+    initCharts();
 
-        // --- Main Functions ---
+    // --- Core Logic ---
+    processBtn.onclick = () => {
+        const file = fileInput.files[0];
+        if (!file) return alert('เลือกไฟล์ก่อนครับ');
 
-        function handleFileUpload() {
-            const file = fileInput.files[0];
-            if (!file) { alert('กรุณาเลือกไฟล์ก่อนครับ'); return; }
+        const reader = new FileReader();
+        const ext = file.name.split('.').pop().toLowerCase();
 
-            const reader = new FileReader();
-            const ext = file.name.split('.').pop().toLowerCase();
-
+        reader.onload = (e) => {
+            let rows = [];
             if (ext === 'csv') {
-                reader.onload = (e) => {
-                    const rows = e.target.result.trim().split(/\r\n|\n/).slice(1).map(row => row.split(','));
-                    parseReportData(rows);
-                };
-                reader.readAsText(file, 'UTF-8');
-            } else if (['xlsx', 'xls'].includes(ext)) {
-                reader.onload = (e) => {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-                    // raw: true helps us get accurate date serial numbers
-                    const rows = XLSX.utils.sheet_to_json(worksheet, { header: 1, raw: true }); 
-                    parseReportData(rows.slice(1));
-                };
-                reader.readAsArrayBuffer(file);
+                rows = e.target.result.split('\n').map(r => r.split(','));
             } else {
-                alert('รองรับเฉพาะไฟล์ .csv, .xlsx, และ .xls เท่านั้น');
+                const data = new Uint8Array(e.target.result);
+                const wb = XLSX.read(data, { type: 'array', raw: true });
+                rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1 });
             }
-        }
+            parseData(rows);
+        };
 
-        // Robust Date Parser
-        function parseInputDate(value) {
-            if (!value) return null;
-            // Case 1: Excel Serial Number (e.g., 45678)
-            if (typeof value === 'number' && value > 20000) { 
-                return new Date(Math.round((value - 25569) * 86400 * 1000));
-            }
-            // Case 2: String Date (e.g., "31/12/2024")
-            const strVal = String(value).trim();
-            const thaiDateMatch = strVal.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
-            if (thaiDateMatch) {
-                return new Date(thaiDateMatch[3], thaiDateMatch[2] - 1, thaiDateMatch[1]);
-            }
-            // Fallback
-            const d = new Date(strVal);
-            return isNaN(d.getTime()) ? null : d;
-        }
+        if (ext === 'csv') reader.readAsText(file);
+        else reader.readAsArrayBuffer(file);
+    };
 
-        function parseReportData(sourceRows) {
-            allCleanData = [];
-            customerDetails = {};
-            let currentCustomer = {};
-            let latestDate = null;
-            let outstandingItems = [];
+    function parseData(rows) {
+        allCleanData = [];
+        customerDetails = {};
+        let currentCust = null;
+        let tempItems = [];
+        let lastDate = null;
 
-            sourceRows.forEach(columns => {
-                if (!columns || columns.length === 0) return;
+        rows.forEach(row => {
+            if (!row || row.length < 5) return;
 
-                // Detect Customer Info Row
-                if (columns[1] && String(columns[1]).includes('/')) {
-                    const infoParts = String(columns[1]).split('/');
-                    currentCustomer = {
-                        name: infoParts[0] ? infoParts[0].trim() : '',
-                        hn: infoParts[1] ? infoParts[1].trim() : '',
-                        phone: infoParts[2] ? infoParts[2].trim() : ''
-                    };
-                    if (!customerDetails[currentCustomer.name]) {
-                        customerDetails[currentCustomer.name] = { ...currentCustomer, transactions: [] };
-                    }
-                    latestDate = null; // Reset for new customer
+            // ตรวจสอบแถวชื่อลูกค้า (มักมี / คั่น)
+            if (row[1] && String(row[1]).includes('/')) {
+                const parts = row[1].split('/');
+                currentCust = { name: parts[0].trim(), hn: parts[1].trim(), phone: parts[2] ? parts[2].trim() : '' };
+                if (!customerDetails[currentCust.name]) {
+                    customerDetails[currentCust.name] = { ...currentCust, transactions: [] };
                 }
-
-                const itemName = columns[3];
-                const transactionDate = parseInputDate(columns[5]);
-                
-                // Process Transaction Row
-                if (itemName && transactionDate) {
-                    let balance = 0;
-                    if (typeof columns[10] === 'number') balance = columns[10];
-                    else if (typeof columns[10] === 'string') balance = parseFloat(columns[10].replace(/,/g, '')) || 0;
-                    
-                    const transaction = {
-                        code: columns[2], item: itemName, receipt: columns[4],
-                        date: transactionDate, balance: balance
-                    };
-
-                    if(currentCustomer.name && customerDetails[currentCustomer.name]) {
-                       customerDetails[currentCustomer.name].transactions.push(transaction);
-                    }
-
-                    if (balance !== 0) outstandingItems.push(itemName);
-                    
-                    // Logic: Find the truly latest date
-                    if (!latestDate || transactionDate > latestDate) {
-                        latestDate = transactionDate;
-                    }
-                }
-
-                // Process Summary Row ("รวม")
-                if (columns[5] && String(columns[5]).trim() === 'รวม') {
-                    let finalAmount = 0;
-                    if (typeof columns[10] === 'number') finalAmount = columns[10];
-                    else if (typeof columns[10] === 'string') finalAmount = parseFloat(columns[10].replace(/,/g, '')) || 0;
-
-                    if (finalAmount > 0 && currentCustomer.name && latestDate) {
-                        const formattedDate = `${latestDate.getDate()}/${latestDate.getMonth() + 1}/${latestDate.getFullYear()}`;
-                        // Data Structure: [Name, HN, Phone, Items, DebtAmount(Negative), DateString, RawDateObj]
-                        allCleanData.push([
-                            currentCustomer.name, 
-                            currentCustomer.hn, 
-                            currentCustomer.phone,
-                            outstandingItems.join(', ') || 'N/A', 
-                            -finalAmount, 
-                            formattedDate
-                        ]);
-                    }
-                    outstandingItems = [];
-                    latestDate = null;
-                    currentCustomer = {};
-                }
-            });
-            
-            if (allCleanData.length === 0) {
-                alert('ไม่พบข้อมูลลูกหนี้ หรือรูปแบบไฟล์ไม่ถูกต้อง');
-                return;
             }
 
-            currentDisplayData = [...allCleanData];
-            processCleanData(currentDisplayData);
-            
-            // Enable controls
-            startDateInput.disabled = false;
-            endDateInput.disabled = false;
-            filterBtn.disabled = false;
-            resetBtn.disabled = false;
-        }
+            // ตรวจสอบแถวรายการ
+            const transDate = parseDate(row[5]);
+            if (row[3] && transDate) {
+                const balance = parseFloat(String(row[10]).replace(/,/g, '')) || 0;
+                customerDetails[currentCust.name].transactions.push({
+                    date: transDate, item: row[3], receipt: row[4], balance: balance
+                });
+                if (balance !== 0) tempItems.push(row[3]);
+                if (!lastDate || transDate > lastDate) lastDate = transDate;
+            }
 
-        function processCleanData(rows) {
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
+            // แถวรวม
+            if (String(row[5]).trim() === 'รวม') {
+                const totalBalance = parseFloat(String(row[10]).replace(/,/g, '')) || 0;
+                if (totalBalance !== 0 && currentCust) {
+                    allCleanData.push({
+                        name: currentCust.name,
+                        hn: currentCust.hn,
+                        phone: currentCust.phone,
+                        items: tempItems.join(', '),
+                        amount: -totalBalance, // ปรับให้ค่าค้างเป็นบวก/ลบตามจริง
+                        date: lastDate
+                    });
+                }
+                tempItems = [];
+                lastDate = null;
+            }
+        });
 
-            let totalDebt = 0, overdueDebt = 0, currentDebt = 0, prepaidAmount = 0;
-            const agingBuckets = { '0-30': 0, '31-60': 0, '61-90': 0, '91+': 0 };
-            let tableHTML = '';
-            
-            rows.forEach((columns, index) => {
-                const [name, hn, phone, items, amount, dateStr] = columns;
-                
-                const dateParts = dateStr.split('/');
-                const purchaseDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
-                const daysDiff = Math.floor((today - purchaseDate) / (1000 * 3600 * 24));
-                
-                let status, statusClass, dayText;
-                
-                if (amount >= 0) {
-                    status = 'ชำระล่วงหน้า'; statusClass = 'prepaid'; dayText = '-';
-                    prepaidAmount += amount;
+        currentDisplayData = [...allCleanData];
+        renderDashboard();
+        toggleControls(true);
+    }
+
+    function renderDashboard() {
+        const today = new Date();
+        let stats = { total: 0, overdue: 0, current: 0, prepaid: 0, aging: [0,0,0,0] };
+        let html = '';
+
+        currentDisplayData.forEach((d, i) => {
+            const diffDays = Math.floor((today - d.date) / (1000 * 3600 * 24));
+            let status = 'ปัจจุบัน', sClass = 'current';
+
+            if (d.amount > 0) {
+                stats.total += d.amount;
+                if (diffDays > 30) {
+                    status = 'เกินกำหนด'; sClass = 'overdue'; stats.overdue += d.amount;
+                    if (diffDays <= 60) stats.aging[1] += d.amount;
+                    else if (diffDays <= 90) stats.aging[2] += d.amount;
+                    else stats.aging[3] += d.amount;
                 } else {
-                    totalDebt += Math.abs(amount);
-                    if (daysDiff > 30) {
-                        status = 'เกินกำหนด'; statusClass = 'overdue'; dayText = `${daysDiff} วัน`;
-                        overdueDebt += Math.abs(amount);
-                        if (daysDiff <= 60) agingBuckets['31-60'] += Math.abs(amount);
-                        else if (daysDiff <= 90) agingBuckets['61-90'] += Math.abs(amount);
-                        else agingBuckets['91+'] += Math.abs(amount);
-                    } else {
-                        status = 'ปัจจุบัน'; statusClass = 'current'; dayText = `${30 - daysDiff} วันเหลือ`;
-                        currentDebt += Math.abs(amount);
-                        agingBuckets['0-30'] += Math.abs(amount);
-                    }
+                    stats.current += d.amount;
+                    stats.aging[0] += d.amount;
                 }
-
-                tableHTML += `
-                    <tr class="clickable-row" data-customer-name="${name}">
-                        <td>${index + 1}</td>
-                        <td>${name}</td>
-                        <td>${hn}</td>
-                        <td>${phone}</td>
-                        <td>${items}</td>
-                        <td class="amount ${amount < 0 ? 'negative' : 'positive'}">${formatCurrency(amount)}</td>
-                        <td>${dateStr}</td>
-                        <td>${dayText}</td>
-                        <td><span class="status ${statusClass}">${status}</span></td>
-                    </tr>
-                `;
-            });
-            
-            updateDashboard(
-                { totalDebt, overdueDebt, currentDebt, prepaidAmount, customerCount: rows.length, agingBuckets },
-                tableHTML
-            );
-        }
-
-        // --- Sorting Logic ---
-        function sortTable(column) {
-            if (currentSort.column === column) {
-                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
             } else {
-                currentSort.column = column;
-                currentSort.direction = 'desc'; 
-            }
-            updateSortIcons(column, currentSort.direction);
-            applySort();
-        }
-
-        function applySort() {
-            if (!currentDisplayData || currentDisplayData.length === 0) return;
-            const dir = currentSort.direction === 'asc' ? 1 : -1;
-
-            currentDisplayData.sort((a, b) => {
-                let valA, valB;
-                if (currentSort.column === 'amount') {
-                    valA = parseFloat(a[4]);
-                    valB = parseFloat(b[4]);
-                } else if (currentSort.column === 'date') {
-                    valA = parseDateString(a[5]);
-                    valB = parseDateString(b[5]);
-                }
-                if (valA < valB) return -1 * dir;
-                if (valA > valB) return 1 * dir;
-                return 0;
-            });
-
-            processCleanData(currentDisplayData);
-        }
-
-        function parseDateString(dateStr) {
-            const parts = dateStr.split('/');
-            return new Date(parts[2], parts[1] - 1, parts[0]).getTime();
-        }
-
-        function updateSortIcons(activeColumn, direction) {
-            document.querySelectorAll('th.sortable').forEach(th => th.classList.remove('active'));
-            document.querySelectorAll('.sort-icon').forEach(icon => icon.textContent = '⇅');
-            
-            const iconId = `sortIcon-${activeColumn}`;
-            const iconEl = document.getElementById(iconId);
-            const thEl = iconEl.closest('th');
-            thEl.classList.add('active');
-            iconEl.textContent = direction === 'asc' ? '▲' : '▼'; 
-        }
-
-        // --- Filtering & UI Updates ---
-        function handleFilter() {
-            const startDate = startDateInput.valueAsDate;
-            const endDate = endDateInput.valueAsDate;
-            
-            if (!startDate || !endDate) { alert('กรุณาเลือกช่วงวันที่ให้ครบถ้วน'); return; }
-            if (startDate > endDate) { alert('วันที่เริ่มต้นต้องมาก่อนวันที่สิ้นสุด'); return; }
-            
-            startDate.setHours(0, 0, 0, 0);
-            endDate.setHours(23, 59, 59, 999);
-
-            currentDisplayData = allCleanData.filter(row => {
-                const dateParts = String(row[5]).split('/');
-                const recordDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
-                return recordDate >= startDate && recordDate <= endDate;
-            });
-            
-            if (currentSort.column) applySort();
-            else processCleanData(currentDisplayData);
-        }
-
-        function handleReset() {
-            startDateInput.value = '';
-            endDateInput.value = '';
-            currentDisplayData = [...allCleanData];
-            currentSort = { column: null, direction: 'desc' };
-            document.querySelectorAll('th.sortable').forEach(th => th.classList.remove('active'));
-            document.querySelectorAll('.sort-icon').forEach(icon => icon.textContent = '⇅');
-            processCleanData(currentDisplayData);
-        }
-
-        function updateDashboard(stats, tableHTML) {
-            animateValue(document.getElementById('totalAmount'), 0, stats.totalDebt, 800);
-            animateValue(document.getElementById('overdueAmount'), 0, stats.overdueDebt, 800);
-            animateValue(document.getElementById('currentAmount'), 0, stats.currentDebt, 800);
-            animateValue(document.getElementById('totalCustomers'), 0, stats.customerCount, 800);
-
-            statusChart.data.datasets[0].data = [stats.overdueDebt, stats.currentDebt, stats.prepaidAmount];
-            statusChart.update();
-            
-            agingChart.data.datasets[0].data = [
-                stats.agingBuckets['0-30'], stats.agingBuckets['31-60'],
-                stats.agingBuckets['61-90'], stats.agingBuckets['91+']
-            ];
-            agingChart.update();
-            
-            debtTableBody.innerHTML = tableHTML || `<tr><td colspan="9" class="placeholder">ไม่มีข้อมูลที่ตรงตามเงื่อนไข</td></tr>`;
-        }
-
-        // --- Utilities ---
-        function showDetailsModal(customerName) {
-            const details = customerDetails[customerName];
-            if (!details) return;
-
-            modalTitle.innerHTML = `${details.name} <small style="display:block; font-size:0.9rem; color:#777; margin-top:5px;">HN: ${details.hn} | ${details.phone}</small>`;
-            
-            let html = `<table><thead><tr><th>รหัส</th><th>รายการ</th><th>ใบเสร็จ</th><th>วันที่</th><th>ยอดคงเหลือ</th></tr></thead><tbody>`;
-            details.transactions.forEach(item => {
-                html += `<tr>
-                    <td>${item.code || ''}</td>
-                    <td>${item.item || ''}</td>
-                    <td>${item.receipt || ''}</td>
-                    <td>${item.date.toLocaleDateString('th-TH')}</td>
-                    <td class="amount">${formatCurrency(item.balance)}</td>
-                </tr>`;
-            });
-            html += `</tbody></table>`;
-            modalBody.innerHTML = html;
-            modal.style.display = "block";
-        }
-
-        function formatCurrency(val) { return new Intl.NumberFormat('th-TH').format(val); }
-
-        function animateValue(obj, start, end, duration) {
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerHTML = formatCurrency(Math.floor(progress * (end - start) + start));
-                if (progress < 1) window.requestAnimationFrame(step);
-            };
-            window.requestAnimationFrame(step);
-        }
-
-        // --- Export & Print ---
-        function exportTableToExcel() {
-            if (currentDisplayData.length === 0) { alert('ไม่มีข้อมูลสำหรับส่งออก'); return; }
-            
-            const dataToExport = currentDisplayData.map((row, index) => ({
-                'ลำดับ': index + 1,
-                'ชื่อลูกค้า': row[0],
-                'เลข HN': row[1],
-                'เบอร์โทร': row[2],
-                'รายการที่ค้าง': row[3],
-                'จำนวนเงิน (บาท)': row[4],
-                'วันที่ซื้อล่าสุด': row[5],
-                'สถานะ': calculateStatusText(row[4], row[5])
-            }));
-
-            const ws = XLSX.utils.json_to_sheet(dataToExport);
-            ws['!cols'] = [{wch:5}, {wch:25}, {wch:12}, {wch:12}, {wch:35}, {wch:15}, {wch:12}, {wch:15}];
-            
-            // Format Number Column (F is index 5)
-            const range = XLSX.utils.decode_range(ws['!ref']);
-            for (let R = range.s.r + 1; R <= range.e.r; ++R) {
-                const cell = XLSX.utils.encode_cell({c: 5, r: R});
-                if (ws[cell]) { ws[cell].t = 'n'; ws[cell].z = '#,##0.00'; }
+                status = 'ชำระล่วงหน้า'; sClass = 'prepaid'; stats.prepaid += Math.abs(d.amount);
             }
 
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Debtors Report");
-            XLSX.writeFile(wb, `Florenza_Report_${new Date().toISOString().slice(0,10)}.xlsx`);
-        }
+            html += `
+                <tr class="clickable-row" onclick="openDetails('${d.name}')">
+                    <td>${i+1}</td>
+                    <td>${d.name}</td>
+                    <td>${d.hn}</td>
+                    <td>${d.phone}</td>
+                    <td style="font-weight:bold; color:${d.amount > 0 ? '#e74c3c':'#27ae60'}">${formatNum(d.amount)}</td>
+                    <td>${d.date.toLocaleDateString('th-TH')}</td>
+                    <td><span class="status ${sClass}">${status}</span></td>
+                </tr>
+            `;
+        });
+
+        debtTableBody.innerHTML = html || '<tr><td colspan="7" align="center">ไม่พบข้อมูล</td></tr>';
         
-        function calculateStatusText(amount, dateStr) {
-            if (amount >= 0) return 'ชำระล่วงหน้า';
-            const today = new Date(); today.setHours(0,0,0,0);
-            const dateParts = dateStr.split('/');
-            const pDate = new Date(dateParts[2], dateParts[1]-1, dateParts[0]);
-            const diff = Math.floor((today - pDate)/(1000*3600*24));
-            return diff > 30 ? `เกินกำหนด (${diff} วัน)` : `ปกติ (${30 - diff} วันเหลือ)`;
-        }
+        // Update Stats & Charts
+        document.getElementById('totalAmount').innerText = formatNum(stats.total);
+        document.getElementById('overdueAmount').innerText = formatNum(stats.overdue);
+        document.getElementById('currentAmount').innerText = formatNum(stats.current);
+        document.getElementById('totalCustomers').innerText = currentDisplayData.length;
 
-        function printCurrentTable() {
-            if (currentDisplayData.length === 0) { alert('ไม่มีข้อมูลสำหรับพิมพ์'); return; }
-            const tableHTML = document.querySelector('.table-container table').outerHTML;
-            const win = window.open('', '', 'height=700,width=900');
-            win.document.write(`<html><head><title>Print Report</title>
-            <style>
-                body{font-family:sans-serif;} table{width:100%;border-collapse:collapse;}
-                th,td{border:1px solid #ddd;padding:8px;text-align:left;} th{background:#f2f2f2;}
-                .amount.negative{color:red;} .amount.positive{color:green;}
-            </style></head><body><h2>รายงานลูกหนี้ - Florenza Clinic</h2>${tableHTML}</body></html>`);
-            win.document.close();
-            win.print();
-        }
-    </script>
+        statusChart.data.datasets[0].data = [stats.overdue, stats.current, stats.prepaid];
+        statusChart.update();
+        agingChart.data.datasets[0].data = stats.aging;
+        agingChart.update();
+    }
+
+    // --- Utilities ---
+    function parseDate(val) {
+        if (!val) return null;
+        if (typeof val === 'number') return new Date(Math.round((val - 25569) * 86400 * 1000));
+        const s = String(val).trim();
+        const m = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
+        if (m) return new Date(m[3], m[2]-1, m[1]);
+        const d = new Date(s);
+        return isNaN(d) ? null : d;
+    }
+
+    function formatNum(n) { return new Intl.NumberFormat('th-TH', { minimumFractionDigits: 2 }).format(n); }
+
+    function toggleControls(enable) {
+        [filterBtn, resetBtn, exportBtn, startDateInput, endDateInput].forEach(el => el.disabled = !enable);
+    }
+
+    // --- Actions ---
+    filterBtn.onclick = () => {
+        const start = startDateInput.valueAsDate;
+        const end = endDateInput.valueAsDate;
+        if (!start || !end) return alert('กรุณาเลือกช่วงวันที่');
+        end.setHours(23,59,59);
+
+        currentDisplayData = allCleanData.filter(d => d.date >= start && d.date <= end);
+        renderDashboard();
+    };
+
+    resetBtn.onclick = () => {
+        startDateInput.value = ''; endDateInput.value = '';
+        currentDisplayData = [...allCleanData];
+        renderDashboard();
+    };
+
+    exportBtn.onclick = () => {
+        const data = currentDisplayData.map((d, i) => ({
+            'ลำดับ': i+1, 'ชื่อ': d.name, 'HN': d.hn, 'โทร': d.phone, 
+            'ยอดค้าง': d.amount, 'วันที่ล่าสุด': d.date.toLocaleDateString('th-TH')
+        }));
+        const ws = XLSX.utils.json_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Debtors");
+        XLSX.writeFile(wb, `Report_${new Date().toISOString().slice(0,10)}.xlsx`);
+    };
+
+    // Sorting
+    document.getElementById('sortAmount').onclick = () => {
+        sortDir.amount = sortDir.amount === 'asc' ? 'desc' : 'asc';
+        currentDisplayData.sort((a,b) => sortDir.amount === 'asc' ? a.amount - b.amount : b.amount - a.amount);
+        renderDashboard();
+    };
+
+    document.getElementById('sortDate').onclick = () => {
+        sortDir.date = sortDir.date === 'asc' ? 'desc' : 'asc';
+        currentDisplayData.sort((a,b) => sortDir.date === 'asc' ? a.date - b.date : b.date - a.date);
+        renderDashboard();
+    };
+
+    // Modal Details
+    const modal = document.getElementById('detailsModal');
+    window.openDetails = (name) => {
+        const det = customerDetails[name];
+        document.getElementById('modalTitle').innerText = `ประวัติ: ${name} (HN: ${det.hn})`;
+        let h = `<table><thead><tr><th>วันที่</th><th>รายการ</th><th>เลขที่ใบเสร็จ</th><th>ยอดค้าง</th></tr></thead><tbody>`;
+        det.transactions.forEach(t => {
+            h += `<tr><td>${t.date.toLocaleDateString('th-TH')}</td><td>${t.item}</td><td>${t.receipt}</td><td>${formatNum(t.balance)}</td></tr>`;
+        });
+        h += `</tbody></table>`;
+        document.getElementById('modalBody').innerHTML = h;
+        modal.style.display = 'block';
+    };
+
+    document.querySelector('.close').onclick = () => modal.style.display = 'none';
+    window.onclick = (e) => { if(e.target == modal) modal.style.display = 'none'; };
+
+</script>
+
 </body>
 </html>
